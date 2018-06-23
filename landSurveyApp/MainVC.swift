@@ -9,27 +9,39 @@
 import UIKit
 
 class MainVC: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showLengthConversion),
+                                               name: NSNotification.Name("ShowLengthConversion"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showAreaConversion),
+                                               name: NSNotification.Name("ShowAreaConversion"),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showDecimalAngleConversion),
+                                               name: NSNotification.Name("ShowDecimalAngleConversion"),
+                                               object: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @objc func showLengthConversion() {
+        performSegue(withIdentifier: "ShowLengthConversion", sender: nil)
     }
-    */
+
+    @objc func showAreaConversion() {
+        performSegue(withIdentifier: "ShowAreaConversion", sender: nil)
+    }
+
+    @objc func showDecimalAngleConversion() {
+        performSegue(withIdentifier: "ShowDecimalAngleConversion", sender: nil)
+    }
+    
+    @IBAction func onMoreTapped() {
+        print("Toggle side menu")
+        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
+    }
 
 }
